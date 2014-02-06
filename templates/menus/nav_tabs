@@ -1,0 +1,122 @@
+<ul class="nav nav-tabs [% menu.class %]">
+
+  [% IF menu.news %]
+  <li class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{Home}} <span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      <li><a href="[% make_uri('') %]">{{Home}}</a></li>
+      <li><a href="[% make_uri('wiki') %]">Wiki</a></li>
+      <li><a href="[% make_uri('news') %]">{{News}}</a></li>
+    </ul>
+  </li>
+  [% ELSE %]
+  <li><a href="[% make_uri('') %]">{{Home}}</a></li>
+  <li><a href="[% make_uri('wiki') %]">Wiki</a></li>
+  [% END %]
+
+  <li class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{Schedule}} <span class="caret"></span></a>
+    <ul class="dropdown-menu">
+    [% IF global.config.talks_submissions_open OR global.request.user.is_talks_admin %]
+      <li><a href="[% make_uri('newtalk') %]">{{Submit a talk proposal}}</a></li>
+    [% END %]
+    [% IF global.config.talks_show_schedule OR global.request.user.is_talks_admin %]
+      <li><a href="[% make_uri('schedule') %]">{{Schedule}}</a></li>
+    [% END %]
+      <li><a href="[% make_uri('talks') %]">{{Presentations}}</a></li>
+    [% IF global.request.user.has_registered %]
+      <li><a href="[% make_uri('myschedule') %]">{{Personal Schedule}}</a></li>
+    [% END %]
+      <li><a href="[% make_uri('favtalks') %]">{{Favorite Talks}}</a></li>
+    [% IF global.config.talks_show_schedule OR global.request.user.is_talks_admin %]
+      <li class="divider"></li>
+      <li><a href="[% make_uri('timetable.ics') %]">{{iCal export}}</a></li>
+    [% END %]
+    </ul>
+  </li>
+
+[% IF global.request.user %]
+  <li class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#">[% global.request.user.login %] <span class="caret"></span></a>
+    <ul class="dropdown-menu">
+    [% UNLESS global.request.user.participation OR global.config.closed %]
+      <li><a href="[% make_uri('register') %]">{{Register}}</a></li>
+    [% END %]
+      <li><a href="[% make_uri('main') %]">{{Edit profile}}</a></li>
+      <li><a href="[% make_uri('search') %]">{{Search}}</a></li>
+      <li><a href="[% make_uri('stats') %]">{{Statistics}}</a></li>
+    [% IF menu.profile %]
+      <li><a href="[% make_uri_info('user', global.request.user.user_id) %]">[% global.request.user.login %]</a></li>
+    [% END %]
+      <li class="divider"></li>
+      <li><a href="[% make_uri('logout') %]">{{Logout}}</a></li>
+    </ul>
+  </li>
+[% END %]
+
+[% UNLESS global.request.user %]
+  <li><a href="[% make_uri('main') %]">{{Log in}}</a></li>
+  [% UNLESS global.config.closed %]
+  <li><a href="[% make_uri('register') %]">{{New user}}</a></li>
+  [% END %]
+[% END %]
+
+
+  <li class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{Admin}} <span class="caret"></span></a>
+    <ul class="dropdown-menu">
+
+    [% IF menu.news AND global.request.user.is_news_admin %]
+      <li><a href="[% make_uri('newsadmin') %]">{{News Administration}}</a></li>
+    [% END %]
+
+    [% IF global.request.user.is_talks_admin %]
+      [% IF menu.news AND global.request.user.is_news_admin %]
+      <li class="divider"></li>
+      [% END %]
+      <li><a href="[% make_uri('events') %]">{{Events}}</a></li>
+      <li><a href="[% make_uri('newevent') %]">{{Submit a new event}}</a></li>
+      <li><a href="[% make_uri('tracks') %]">{{Tracks}}</a></li>
+      <li><a href="[% make_uri('ical_import') %]">{{iCal import}}</a></li>
+      <li><a href="[% make_uri('export_talks') %]">{{CSV export}}</a></li>
+    [% END %]
+
+    [% IF global.request.user.is_users_admin %]
+      [% IF menu.news AND global.request.user.is_news_admin OR global.request.user.is_talks_admin %]
+      <li class="divider"></li>
+      [% END %]
+      <li><a href="[% make_uri('export') %]">{{CSV export}}</a></li>
+      <li><a href="[% make_uri('confirm_attend') %]">{{Confirm Attendance}}</a></li>
+      <li><a href="[% make_uri('create') %]">{{Register a new user}}</a></li>
+    [% END %]
+
+    [% IF global.request.user.is_admin %]
+      <li class="divider"></li>
+      <li><a href="[% make_uri('rights') %]">{{Rights management}}</a></li>
+    [% END %]
+    </ul>
+  </li>
+
+[% IF global.request.user.is_treasurer %]
+  <li class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{Treasurer}} <span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      <li><a href="[% make_uri('payments') %]">{{Payments}}</a></li>
+      <li><a href="[% make_uri('csv/payments') %]">{{Payments}} (CSV)</a></li>
+      <li><a href="[% make_uri('csv/payment_items') %]">{{Payment Details}} (CSV)</a></li>
+    </ul>
+  </li>
+[% END %]
+
+[% IF global.languages.length %]
+  <li class="dropdown">
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{Language}} <span class="caret"></span></a>
+    <ul class="dropdown-menu">
+    [% FOREACH lang = global.languages %]
+      <li><a href="[% lang.uri %]">&#x2192;&nbsp;[% lang.name %]</a></li>
+    [% END %]
+    </ul>
+  </li>
+[% END %]
+
+</ul>

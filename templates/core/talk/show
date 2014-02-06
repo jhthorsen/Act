@@ -1,6 +1,6 @@
 [% INCLUDE js/mytalks.js %]
 <p>
-<b>{{By}}</b>
+  <b>{{By}}</b>
 [% user_info(user) %]
 
 [% IF global.request.user.is_talks_admin || global.request.user.user_id == user_id %]

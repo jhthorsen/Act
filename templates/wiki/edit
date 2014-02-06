@@ -4,25 +4,30 @@
 [% preview_content %]
 <hr />
 [% ELSIF conflict %]
-  <div class="warning_text">
-  {{Someone has committed changes to this node since you began editing.}}
-  </div>
+  <p class="alert alert-warning">
+    {{Someone has committed changes to this node since you began editing.}}
+  </p>
 
   <h2>{{Current node contents:}}</h2>
 [% END %]
 
 <form method="POST" action="[% global.request.r.uri %]">
-  <textarea name="content" rows="25" cols="80">[% content %]</textarea>
-  <br />
-  {{Tags:}}&nbsp;<input type="text" name="tags" value="[% tags %]" size="51" maxlength="100" />
-  <br />
-  <a href="[% make_uri('wiki', 'action', 'help') %]">{{Help}}</a>
-  |
-  <input type="hidden" name="action" value="commit" />
-  <input type="hidden" name="node" value="[% node %]" />
-  <input type="hidden" name="checksum" value="[% checksum %]" />
-  <input type="submit" name="preview" value="{{Preview}}" />
-  <input type="submit" name="save" value="{{Save}}" />
+  <textarea name="content" class="form-control" rows="25" cols="80">[% content %]</textarea>
+
+  <p>
+    <label>{{Tags:}}</label>
+    <input type="text" name="tags" class="form-control" value="[% tags %]" maxlength="100" />
+  </p>
+
+  <p>
+    <a href="[% make_uri('wiki', 'action', 'help') %]">{{Help}}</a>
+    |
+    <input type="hidden" name="action" value="commit" />
+    <input type="hidden" name="node" value="[% node %]" />
+    <input type="hidden" name="checksum" value="[% checksum %]" />
+    <button name="preview" value="{{Preview}}">{{Preview}}</button>
+    <button name="save" value="{{Save}}">{{Save}}</button>
+  </p>
 </form>
 
 [% IF conflict %]

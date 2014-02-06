@@ -2,7 +2,6 @@
    ELSE;   title = loc("List of talks");
    END;
    WRAPPER ui title = title %]
-<div align="center">
 <p>
  [% IF talks_total == 0 %]
  {{No talk was submitted yet.}}
@@ -26,7 +25,6 @@
  [% talks_lightning %]
 </p>
 [% END %]
-</div>
 
 [% IF !tag AND tagcloud %]
   <h2>{{Tags}}</h2>

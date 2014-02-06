@@ -1,6 +1,6 @@
 [% WRAPPER ui title = loc("Talk removed") %]
 
-<p>
+<p class="alert alert-warning">
  [% loc('The Talk <title> has been removed.', title) %]
 </p>
 

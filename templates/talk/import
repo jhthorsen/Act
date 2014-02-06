@@ -1,54 +1,39 @@
 [% WRAPPER ui title = loc("iCal Import") %]
-<center>
 [% IF timeslots %]
-  <p>
-   {{The following talks have been updated:}}
-  </p>
-  <table border="1" cellspacing="0" cellpadding="4">
-  <tr>
-    <th>{{title}}</th>
-    <th>{{Old time}}</th>
-    <th>{{New time}}</th>
-  </tr>
-  [% FOREACH t=timeslots %]
+<p>
+  {{The following talks have been updated:}}
+</p>
+<table class="table">
+  <thead>
     <tr>
-    <td>[% IF t.type == 'Act::Event' %]
-         [% event_link(t) %]
-         [% event_modify_link(t) %]
-      [% ELSE %]
-         [% talk_link(t) %]
-         [% talk_modify_link(t) %]
-      [% END %]
-    </td>
-    <td>[% IF t.dt1; date_format(t.dt1,'datetime_short'); ELSE; '&nbsp;'; END %]</td>
-    <td>[% date_format(t.dt2,'datetime_short') %]</td>
-  </tr>
+      <th>{{title}}</th>
+      <th>{{Old time}}</th>
+      <th>{{New time}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    [% FOREACH t=timeslots %]
+    <tr>
+      <td>
+        [% IF t.type == 'Act::Event' %]
+          [% event_link(t) %]
+          [% event_modify_link(t) %]
+        [% ELSE %]
+          [% talk_link(t) %]
+          [% talk_modify_link(t) %]
+        [% END %]
+      </td>
+      <td>[% IF t.dt1; date_format(t.dt1,'datetime_short'); ELSE; '&nbsp;'; END %]</td>
+      <td>[% date_format(t.dt2,'datetime_short') %]</td>
+    </tr>
   [% END %]
-  </table><br />
+  </tbody>
+</table>
 [% END %]
 
 <form method="POST" enctype="multipart/form-data">
-<table border="1" cellpadding="10" cellspacing="0">
-<tr><td>
-<table border="0" cellpadding="0" cellspacing="10" width="100%">
-<tr>
-   <td>
-     {{Upload an iCal file}}
-  </td>
-</tr>
-<tr>
-   <td>
-      <input type="file" name="ics" size="40" /><br />
-   </td>
-</tr>
-<tr>
-   <td align="right">
-      <input type="submit" name="update" value="{{Import}}" />
-   </td>
-</tr>
-</table>
-</td></tr></table>
-
+  <label>{{Upload an iCal file}}</label>
+  <input type="file" name="ics" size="40" /><br />
+  <button class="btn btn-success" type="submit" name="update" value="{{Import}}">{{Import}}</button>
 </form>
-</center>
 [% END %]

@@ -1,5 +1,3 @@
-<center>
-
 [% PROCESS error
    msgs = {
      ERR_FIRST_NAME         => loc("You must enter your first name"),
@@ -19,84 +17,63 @@
   }
 %]
 
-<form method="POST" action="[% global.request.r.uri %]">
-
-<table border="1" cellpadding="10" cellspacing="0"><tr><td>
-<table border="0" cellpadding="0" cellspacing="10">
-
-<tr>
-   <td align="right">
-      {{Salutation}}
-   </td>
-   <td>&nbsp;</td>
-   <td>
+<form method="POST" action="[% global.request.r.uri %]" class="form-horizontal">
+  <div class="form-group">
+    <label for="" class="col-sm-2 control-label">{{Salutation}}</label>
+    <div class="col-sm-8">
       [% FOREACH s = [1 .. salutations] %]
       <input type="radio" name="salutation" id="form-salutation" value="[% s %]"[% " checked" IF salutation == s %] /> <label for="form-salutation">[% loc("salutation_$s") %]</label>
       [% END %]
-   </td>
-</tr>
-<tr>
-   <td align="right">
-      <label for="form-first-name">{{First Name}}</label>
-   </td>
-   <td>&nbsp;</td>
-   <td>
-      <input type="text" name="first_name" id="form-first-name"  value="[% first_name %]" size="25" maxlength="60" />
-   </td>
-</tr>
-<tr>
-   <td align="right">
-      <label for="form-last-name">{{Last Name}}</label>
-   </td>
-   <td>&nbsp;</td>
-   <td>
-      <input type="text" name="last_name" id="form-last-name"  value="[% last_name %]" size="25" maxlength="60" />
-   </td>
-</tr>
-<tr>
-   <td align="right">
-      <label for="form-nick-name">{{Nickname}}</label>
-   </td>
-   <td>&nbsp;</td>
-   <td>
-      <input type="text" name="nick_name" id="form-nick-name"  value="[% nick_name %]" size="25" maxlength="60" />
-   </td>
-</tr>
-<tr>
-   <td align="right">
-      {{Stay pseudonymous}}
-   </td>
-   <td>&nbsp;</td>
-   <td>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="form-first-name" class="col-sm-2 control-label">{{First Name}}</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" name="first_name" id="form-first-name"  value="[% first_name %]" maxlength="60" />
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="form-last-name" class="col-sm-2 control-label">{{Last Name}}</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" name="last_name" id="form-last-name" value="[% last_name %]" maxlength="60" />
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="form-nick-name" class="col-sm-2 control-label">{{Nickname}}</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" name="nick_name" id="form-nick-name"  value="[% nick_name %]" maxlength="60" />
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label">{{Stay pseudonymous}}</label>
+    <div class="col-sm-8">
       <input type="radio" name="pseudonymous" value="1" [% "checked" IF pseudonymous %] /> {{Yes}}
       <input type="radio" name="pseudonymous" value="0" [% "checked" UNLESS pseudonymous %] /> {{No}}
-   </td>
-</tr>
-<tr>
-   <td align="right">
-      <label for="form-email">{{Email}}</label>
-   </td>
-   <td>&nbsp;</td>
-   <td>
-      <input type="text" name="email" id="form-email"  value="[% email %]" size="25" maxlength="60" />
-   </td>
-</tr>
-<tr>
-   <td align="right">
-      {{Hide email}}
-   </td>
-   <td>&nbsp;</td>
-   <td>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="form-email" class="col-sm-2 control-label">{{Email}}</label>
+    <div class="col-sm-8">
+      <input type="text" name="email" id="form-email" class="form-control" value="[% email %]" maxlength="60" />
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label">{{Hide email}}</label>
+    <div class="col-sm-8">
       <input type="radio" name="email_hide" value="1" [% "checked" IF email_hide %] /> {{Yes}}
       <input type="radio" name="email_hide" value="0" [% "checked" UNLESS email_hide %] /> {{No}}
-   </td>
-</tr>
-<tr>
-   <td align="right">
-    <label for="form-nb-family">{{Coming with}}</label>
-   </td>
-   <td>&nbsp;</td>
-   <td>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="form-nb-family" class="col-sm-2 control-label">{{Coming with}}</label>
+    <div class="col-sm-8">
       <select name="nb_family" id="form-nb-family">
          <option value="0"[% ' selected="selected"' UNLESS nb_family %]>0</option>
          [% FOREACH c = [ 1..5 ] %]
@@ -104,15 +81,13 @@
          [% END %]
          <option value="6"[% ' selected="selected"' IF nb_family AND nb_family >= 6 %]>{{6 or more}}</option>
       </select>
-      {{people (who will not attend the conference)}}
-   </td>
-</tr>
-<tr>
-   <td align="right">
-    <label for="form-tshirt-size">{{T-shirt size}}</label>
-   </td>
-   <td>&nbsp;</td>
-   <td>
+      <p class="help-block">{{people (who will not attend the conference)}}</p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="form-tshirt-size" class="col-sm-2 control-label">{{T-shirt size}}</label>
+    <div class="col-sm-8">
       <select name="tshirt_size" id="form-tshirt-size">
          [% UNLESS tshirt_size %]<option value="" selected="selected" />[% END %]
          [% FOREACH t = [ 'XS', 'XS (W)', 'S', 'S (W)', 'M', 'M (W)',
@@ -121,214 +96,198 @@
          <option value="[% t %]"[% ' selected="selected"' IF tshirt_size == t %]>[% t %]</option>
          [% END %]
       </select>
-   </td>
-</tr>
-<tr>
-   <td align="right">
-      <label for="form-town">{{City}}</label>
-   </td>
-   <td>&nbsp;</td>
-   <td>
-      <input type="text" name="town" id="form-town"  value="[% town %]" size="25" maxlength="60" />
-   </td>
-</tr>
-<tr>
-   <td align="right">
-      <label for="form-country">{{Country}}</label>
-   </td>
-   <td>&nbsp;</td>
-   <td>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="form-town" class="col-sm-2 control-label">{{City}}</label>
+    <div class="col-sm-8">
+      <input type="text" class="form-control" name="town" id="form-town"  value="[% town %]" maxlength="60" />
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="form-country" class="col-sm-2 control-label">{{Country}}</label>
+    <div class="col-sm-8">
       <select name="country" id="form-country">
          [% FOREACH c = countries %]
             <option value="[% c.iso %]"[% ' selected="selected"' IF country == c.iso %]>[% c.name %]</option>
          [% END %]
       </select>
-   </td>
-</tr>
-<tr>
-   <td align="right" valign="top">
-      <label for="form-address">{{Full address}}</label>
-   </td>
-   <td>&nbsp;</td>
-   <td>
-      <textarea name="address" id="form-address" cols="25" rows="5" >[% address | form_unescape %]</textarea>
-   </td>
-</tr>
-<tr>
-   <td align="right">
-      <label for="form-timezone">{{Timezone}}</label>
-   </td>
-   <td>&nbsp;</td>
-   <td>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="form-address" class="col-sm-2 control-label">{{Full address}}</label>
+    <div class="col-sm-8">
+      <textarea name="address" class="form-control" id="form-address" rows="5" >[% address | form_unescape %]</textarea>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="form-timezone" class="col-sm-2 control-label">{{Timezone}}</label>
+    <div class="col-sm-8">
       <select name="timezone" id="form-timezone">
          [% FOREACH tz = timezones %]
             <option value="[% tz %]"[% ' selected="selected"' IF timezone == tz %]>[% tz %]</option>
          [% END %]
       </select>
-   </td>
-</tr>
-<tr>
-   <td align="right">
-      [%- IF web_page %]
-         <a href="[% web_page %]" >
-      [% END %]
-      {{Web page}}
-      [%- IF web_page %]
-         </a>
-      [% END %]
-   </td>
-   <td>&nbsp;</td>
-   <td>
-      <input type="text" name="web_page"  value="[% web_page %]" size="40" maxlength="120" />
-   </td>
-</tr>
-<tr>
-   <td align="right" valign="top">
-      [%- IF pm_group_url %]
-         <a href="[% pm_group_url %]" >
-      [% END %]
-      {{Monger group}}
-      [%- IF pm_group_url %]
-         </a>
-      [% END %]
-   </td>
-   <td>&nbsp;</td>
-   <td valign="top">
-      <input type="text" name="pm_group"  value="[% pm_group %]" size="40" maxlength="120" /><br />
-      {{(<em>City.pm</em>, city name in English, please)}}
-   </td>
-</tr>
-<tr>
-   <td align="right">
-      [%- IF pm_group_url %]
-         <a href="[% pm_group_url %]" >
-      [% END %]
-      {{Monger group URL}}
-      [%- IF pm_group_url %]
-         </a>
-      [% END %]
-   </td>
-   <td>&nbsp;</td>
-   <td>
-      <input type="text" name="pm_group_url"  value="[% pm_group_url %]" size="40" maxlength="120" />
-   </td>
-</tr>
-<tr>
-   <td align="right" valign="top">
-      [%- IF company_url %]
-         <a href="[% company_url %]" >
-      [% END %]
-      {{Company}}
-      [%- IF company_url %]
-         </a>
-      [% END %]
-   </td>
-   <td>&nbsp;</td>
-   <td valign="top">
-      <input type="text" name="company"  value="[% company %]" size="40" maxlength="120" /><br />
-   </td>
-</tr>
-<tr>
-   <td align="right">
-      <label for="form-vat">{{VAT Number}}</label>
-   </td>
-   <td>&nbsp;</td>
-   <td>
-      <input type="text" name="vat" id="form-vat" value="[% vat %]" size="25" maxlength="60" />
-   </td>
-</tr>
-<tr>
-   <td align="right">
-      [%- IF company_url %]
-         <a href="[% company_url %]" >
-      [% END %]
-      {{Company URL}}
-      [%- IF company_url %]
-         </a>
-      [% END %]
-   </td>
-   <td>&nbsp;</td>
-   <td>
-      <input type="text" name="company_url"  value="[% company_url %]" size="40" maxlength="120" />
-   </td>
-</tr>
-<tr>
-   <td align="right">
-      [%- IF gpg_key_id %]
-         <a href="http://pgp.mit.edu:11371/pks/lookup?op=vindex&search=0x[% gpg_key_id %]">
-      [% END %]
-      {{GPG public key ID}}
-      [%- IF gpg_key_id %]
-         </a>
-      [% END %]
-   </td>
-   <td>&nbsp;</td>
-   <td>
-      Ox<input type="text" name="gpg_key_id" value="[% gpg_key_id %]" size="8" maxlength="8" />
-   </td>
-</tr>
-<tr>
-   <td align="right">
-      [%- IF pause_id %]
-         <a href="https://metacpan.org/author/[% pause_id %]/" >
-      [% END %]
-      <a href="https://pause.perl.org/">PAUSE</a> id
-      [%- IF pause_id %]
-         </a>
-      [% END %]
-   </td>
-   <td>&nbsp;</td>
-   <td>
-      <input type="text" name="pause_id"  value="[% pause_id %]" size="25" maxlength="60" />
-   </td>
-</tr>
-<tr>
-   <td align="right">
-      [%- IF monk_id %]
-         <a href="http://perlmonks.org/index.pl?node_id=[% monk_id %]" >
-      [% END %]
-      Perlmonks id
-      [%- IF monk_id %]
-         </a>
-      [% END %]
-   </td>
-   <td>&nbsp;</td>
-   <td>
-      <input type="text" name="monk_id"  value="[% monk_id %]" size="25" maxlength="60" />
-   </td>
-</tr>
-<tr>
-   <td align="right">
-      <label for="form-im">{{IM}}</label>
-   </td>
-   <td>&nbsp;</td>
-   <td>
-      <input type="text" name="im" id="form-im" value="[% im %]" size="25" maxlength="60" />
-   </td>
-</tr>
-<tr>
-   <td align="right" valign="top">
-      {{Bio}}
-   </td>
-   <td>&nbsp;</td>
-   <td>
-      [% FOREACH lang = global.config.languages.keys %]
-      [% global.config.languages.$lang.name|ucfirst %]
-      [% IF lang == 'en' %]
-      {{(please fill at least this one)}}
-      [% END %]<br />
-      <textarea name="bio_[% lang %]" cols="40" rows="5">[% bio.$lang | form_unescape %]</textarea>
-      <br />
-      [% END %]
-   </td>
-</tr>
-<tr>
-   <td colspan="3" align="right">
-      <input type="submit" name="join" value="{{Update info}}" />
-   </td>
-</tr>
-</table>
-</td></tr></table>
+    </div>
+  </div>
 
+  <div class="form-group">
+    <label class="col-sm-2 control-label">
+    [%- IF web_page %]
+      <a href="[% web_page %]" >
+    [% END %]
+      {{Web page}}
+    [%- IF web_page %]
+      </a>
+    [% END %]
+    </label>
+    <div class="col-sm-8">
+      <input type="text" name="web_page" class="form-control" value="[% web_page %]" maxlength="120" />
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label">
+    [%- IF pm_group_url %]
+      <a href="[% pm_group_url %]" >
+    [% END %]
+      {{Monger group}}
+    [%- IF pm_group_url %]
+      </a>
+    [% END %]
+    </label>
+    <div class="col-sm-8">
+      <input type="text" name="pm_group" class="form-control" value="[% pm_group %]" maxlength="120" />
+      <p class="help-block">{{(<em>City.pm</em>, city name in English, please)}}</p>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label">
+    [%- IF pm_group_url %]
+      <a href="[% pm_group_url %]" >
+    [% END %]
+    {{Monger group URL}}
+    [%- IF pm_group_url %]
+      </a>
+    [% END %]
+    </label>
+    <div class="col-sm-8">
+      <input type="text" name="pm_group_url" class="form-control" value="[% pm_group_url %]" maxlength="120" />
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label">
+    [%- IF company_url %]
+      <a href="[% company_url %]" >
+    [% END %]
+      {{Company}}
+    [%- IF company_url %]
+      </a>
+    [% END %]
+    </label>
+    <div class="col-sm-8">
+      <input type="text" name="company" class="form-control" value="[% company %]" maxlength="120" />
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label" for="form-vat">{{VAT Number}}</label>
+    <div class="col-sm-8">
+      <input type="text" name="vat" id="form-vat" class="form-control" value="[% vat %]" maxlength="60" />
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label">
+    [%- IF company_url %]
+      <a href="[% company_url %]" >
+    [% END %]
+      {{Company URL}}
+    [%- IF company_url %]
+      </a>
+    [% END %]
+    </label>
+    <div class="col-sm-8">
+      <input type="text" name="company_url" class="form-control" value="[% company_url %]" maxlength="120" />
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label">
+    [%- IF gpg_key_id %]
+      <a href="http://pgp.mit.edu:11371/pks/lookup?op=vindex&search=0x[% gpg_key_id %]">
+    [% END %]
+      {{GPG public key ID}}
+    [%- IF gpg_key_id %]
+      </a>
+    [% END %]
+    </label>
+    <div class="col-sm-8">
+      <div class="input-group">
+        <span class="input-group-addon">Ox</span>
+        <input type="text" name="gpg_key_id" class="form-control" value="[% gpg_key_id %]" maxlength="8" />
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label">
+    [%- IF pause_id %]
+      <a href="https://metacpan.org/author/[% pause_id %]/" >
+    [% END %]
+      <a href="https://pause.perl.org/">PAUSE</a> id
+    [%- IF pause_id %]
+      </a>
+    [% END %]
+    </label>
+    <div class="col-sm-8">
+      <input type="text" name="pause_id" class="form-control" value="[% pause_id %]" maxlength="60" />
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-sm-2 control-label">
+    [%- IF monk_id %]
+      <a href="http://perlmonks.org/index.pl?node_id=[% monk_id %]" >
+    [% END %]
+      Perlmonks id
+    [%- IF monk_id %]
+      </a>
+    [% END %]
+    </label>
+    <div class="col-sm-8">
+      <input type="text" name="monk_id" class="form-control" value="[% monk_id %]" maxlength="60" />
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="form-im" class="col-sm-2 control-label">{{IM}}</label>
+    <div class="col-sm-8">
+      <input type="text" name="im" id="form-im" class="form-control" value="[% im %]" maxlength="60" />
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="bio" class="col-sm-2 control-label">{{Bio}}</label>
+    <div class="col-sm-8">
+    [% FOREACH lang = global.config.languages.keys %]
+      <textarea name="bio_[% lang %]" class="form-control" rows="5" placeholder="[% global.config.languages.$lang.name|ucfirst %]">[% bio.$lang | form_unescape %]</textarea>
+      [% IF lang == 'en' %]
+      <p class="help-block">{{(please fill at least this one)}}</p>
+      [% END %]
+    [% END %]
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-8">
+      <button name="join" value="{{Update info}}" class="btn btn-success">{{Update info}}</button>
+    </div>
+  </div>
 </form>
-</center>

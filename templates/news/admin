@@ -1,16 +1,22 @@
 [% WRAPPER ui title = loc("News Administration") %]
 
+<p><a href="[% make_uri('newsedit') %]">{{Create a new item}}</a></p>
+
 [% IF news.size %]
-<table border="1" cellspacing="0" cellpadding="4">
-<tr>
- <th>{{Date}}</th>
- <th>{{Title}}</th>
- <th>{{Published}}</th>
-</tr>
+<table class="table">
+  <thead>
+    <tr>
+      <th>{{Date}}</th>
+      <th>{{Title}}</th>
+      <th>{{Published}}</th>
+    </tr>
+  </thead>
+  <tbody>
 [% FOREACH n = news %]
-  <tr>
-    <td>[% date_format(n.datetime, 'datetime_short') %]</td>
-    <td>[% IF global.config.languages.keys.size > 1 %]
+    <tr>
+      <td>[% date_format(n.datetime, 'datetime_short') %]</td>
+      <td>
+        [% IF global.config.languages.keys.size > 1 %]
           <table border="0">
           [% FOREACH lang = n.items.keys.sort %]
           <tr>
@@ -19,15 +25,15 @@
           </tr>
           [% END %]
           </table>
-        [% ELSE;
-           lang = n.items.keys.0 %]
+        [% ELSE; lang = n.items.keys.0 %]
           <a href="[% make_uri('newsedit', 'news_id', n.news_id) %]">[% n.items.$lang.title %]</a>
         [% END %]
-    </td>
-    <td align="center">[% '✓' IF n.published %]</td>
-  </tr>
+      </td>
+      <td align="center">[% '✓' IF n.published %]</td>
+    </tr>
 [% END %]
+  </tbody>
 </table>
 [% END %]
-<a href="[% make_uri('newsedit') %]">{{Create a new item}}</a>
+
 [% END %]

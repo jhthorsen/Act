@@ -1,5 +1,4 @@
 [% WRAPPER ui title = loc("Your photo") %]
-<center>
 [% IF error;
      WRAPPER error_ui;
        loc("Image couldn't be read. Please upload your picture in one of the following formats:");
@@ -9,45 +8,30 @@
 %]
 
 <form method="POST" enctype="multipart/form-data">
+  <div class="row">
+    <div class="col-md-8">
+      <p>
+        {{This photo will probably end up on the conference who's who,}}
+        <code>;-)</code>
+      </p>
 
-<table border="1" cellpadding="10" cellspacing="0"><tr><td>
-<table border="0" cellpadding="0" cellspacing="10" width="100%">
-<tr>
-   <td align="center">
+      <input type="file" name="photo">
+      <br>
+
+      <button class="btn btn-success" name="update" value="{{Update Photo}}">{{Update Photo}}</button>
+    [%- IF global.request.user.photo_name %]
+      <button class="btn btn-danger" name="delete" value="{{Delete Photo}}">{{Delete Photo}}</button>
+    [% END %]
+    </div>
+
+    <div class="col-md-4">
+      <span class="thumbnail">
       [%- IF global.request.user.photo_name %]
          <img src="[% photo_uri %]" border="0">
       [%- ELSE %]
          {{No photo}}
       [% END %]<br />
-   </td>
-</tr>
-</table>
-</td></tr><tr><td>
-<table border="0" cellpadding="0" cellspacing="10" width="100%">
-<tr>
-   <td colspan="2" align="left">
-    {{This photo will probably end up on the conference who's who,}}
-    <tt>;-)</tt>
-   </td>
-</tr>
-<tr>
-   <td colspan="2" align="center">
-      <input type="file" name="photo" size="40" /><br />
-   </td>
-</tr>
-<tr>
-   <td align="left">
-      [%- IF global.request.user.photo_name %]
-         <input type="submit" name="delete" value="{{Delete Photo}}" />
-      [% END %]
-   </td>
-   <td align="right">
-      <input type="submit" name="update" value="{{Update Photo}}" />
-   </td>
-</tr>
-</table>
-</td></tr></table>
-
+      </span>
+    </div>
 </form>
-</center>
 [% END %]

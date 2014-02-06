@@ -2,11 +2,10 @@
 
 [% content %]
 
+[% IF version OR data.last_modified %]
 <hr />
-
 <p>
- [% IF version OR data.last_modified;
-    IF version %]
+  [% IF version %]
   {{version}} [% version %]
   {{saved on}}
     [% ELSE %]
@@ -17,8 +16,9 @@
   [% user_info( author ) %]
  [% ELSE %]
   {{new page}}
- [% END %]
 </p>
+[% END %]
+
 [% showtags(tags, 'wiki', [ [ 'node', node ] ] ) UNLESS version OR NOT data.last_modified %]
 <p>
 <a href="[% make_uri('wiki') %]">{{Home}}</a>

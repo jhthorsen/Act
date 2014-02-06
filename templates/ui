@@ -1,15 +1,12 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="[% global.request.language %]" xml:lang="[% global.request.language %]">
 <head>
-<link rel="shortcut icon" type="image/png" href="/favicon.png" />
-<link rel="stylesheet" type="text/css" href="[% make_uri_info('css', 'act-base.css') %]" />
-[% IF title %]<title>[% title  %]</title>[% END %]
+  <link rel="shortcut icon" type="image/png" href="/favicon.png" />
+  <link rel="stylesheet" type="text/css" href="[% make_uri_info('css', 'act-base.css') %]" />
+  [% IF title %]<title>[% title  %]</title>[% END %]
 </head>
 <body>
-[% IF title %]<h1>[% title  %]</h1>[% END %]
-
-[% content %]
-
+  [% IF title %]<h1 class="page-header">[% title  %]</h1>[% END %]
+  [% content %]
 </body>
 </html>

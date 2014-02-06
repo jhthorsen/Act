@@ -1,9 +1,7 @@
 [% WRAPPER ui title = loc('Logout') %]
-<center>
 
-<p>
-{{You have been logged out and the cookie deleted from your browser.}}
+<p class="text-center">
+  {{You have been logged out and the cookie deleted from your browser.}}
 </p>
 
-</center>
 [% END %]

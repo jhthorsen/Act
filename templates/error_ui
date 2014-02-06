@@ -1,2 +1,1 @@
-<span class="error">[% content %]</span>
-<br />
+<div class="alert alert-danger">[% content %]</div>
