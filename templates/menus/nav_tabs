@@ -61,7 +61,7 @@
   [% END %]
 [% END %]
 
-
+[% IF global.request.user.is_news_admin OR global.request.user.is_talks_admin OR global.request.user.is_users_admin OR global.request.user.is_admin %]
   <li class="dropdown">
     <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{Admin}} <span class="caret"></span></a>
     <ul class="dropdown-menu">
@@ -96,6 +96,7 @@
     [% END %]
     </ul>
   </li>
+[% END %]
 
 [% IF global.request.user.is_treasurer %]
   <li class="dropdown">
