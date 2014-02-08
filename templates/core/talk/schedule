@@ -72,9 +72,9 @@
 [% END %]
 [% d = day %]
   <h2>[% date_format(d.replace('$', ' 00:00:00' ), 'date_full') | ucfirst %]</h2>
-<table class="table">
+<table class="table table-bordered">
   <thead>
-    <tr class="header">
+    <tr>
       <th>{{Time}}</th>
     [% FOREACH r IN room.keys.sort %]
       [% IF width.$r.$d %]
@@ -85,12 +85,12 @@
   </thead>
   <tbody>
   [% FOREACH row IN table.$d %]
-    <tr class="header">
+    <tr>
     [% FOREACH col IN row %]
       [% IF loop.first %]
-     <td align="center" valign="top" class="header">[% date_format(col, 'time').replace(' ', '&nbsp;') %]</td>
+     <td>[% date_format(col, 'time').replace(' ', '&nbsp;') %]</td>
       [% ELSE %]
-     <td valign="top" [% IF col.height AND col.height > 1 %]rowspan="[% col.height %]"[% END %] [% IF col.room %]class="[% col.room %]"[% IF col.room.match('^(?:out|venue)$') %] colspan="[% maxwidth.$d %]"[% END %][% END %]>
+     <td [% IF col.height AND col.height > 1 %]rowspan="[% col.height %]"[% END %] [% IF col.room %]class="[% col.room %]"[% IF col.room.match('^(?:out|venue)$') %] colspan="[% maxwidth.$d %]"[% END %][% END %]>
        [% timeslot(col) %]
        <span id="starcount-[% col.id %]" style="white-space:nowrap">[% IF col.stars %]<span class="starcount">[% col.stars %]</span><img style="vertical-align:middle" src="/images/picked.gif" />[% END %]</span>
      </td>
