@@ -38,7 +38,7 @@
       </p>
     [% END %]
   [% ELSIF !global.config.closed %]
-    <p>[% loc("You did not register for this conference", make_uri('register')) %]</p>
+    <p class="alert alert-success">[% loc("You did not register for this conference", make_uri('register')) %]</p>
   [% END %]
 [% END %]
 
@@ -69,7 +69,11 @@
     [% END %]
   [% END %]
 [% ELSIF !global.config.closed %]
-      <li><a href="[% make_uri('register') %]">{{register for this conference}}</a></li>
+      <li>
+        <form method="POST" action="[% make_uri('register') %]">
+          <button name="join" value="{{Join}} [% global.conference.name %]" class="btn btn-success" style="font-size:2em">{{Join}} [% global.conference.name %]</button>
+        </form>
+      </li>
 [% END %]
       <li><a href="[% make_uri('change') %]">{{update your information}}</a></li>
       <li><a href="[% make_uri('photo') %]">{{manage your photo}}</a></li>
